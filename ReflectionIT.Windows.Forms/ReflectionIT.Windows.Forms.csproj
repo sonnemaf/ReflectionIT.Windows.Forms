@@ -7,6 +7,17 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>Fons Sonnemans</Authors>
 		<Company>Reflection IT</Company>
+		<RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Windows.Forms</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/sonnemaf/ReflectionIT.Windows.Forms</PackageProjectUrl>
+		<Copyright>Reflection IT</Copyright>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+	</ItemGroup>
 
 </Project>
