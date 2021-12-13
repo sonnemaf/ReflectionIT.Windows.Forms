@@ -13,6 +13,14 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0-windows|AnyCPU'">
+	  <DocumentationFile>C:\Users\Fons\source\repos\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0-windows|AnyCPU'">
+	  <DocumentationFile>C:\Users\Fons\source\repos\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms.xml</DocumentationFile>
+	</PropertyGroup>
+
 	<ItemGroup>
 	  <None Include="..\LICENSE">
 	    <Pack>True</Pack>

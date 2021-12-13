@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReflectionIT.Windows.Forms</name>
+    </assembly>
+    <members>
+        <member name="T:ReflectionIT.Windows.Forms.MoveItemBehavior">
+            <summary>
+            Summary description for DualListComponent.
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.WaitCursor">
+            <summary>
+            Make the current Cursor a WaitCursor and restore it on Dispose
+            <code>
+            using (new WaitCursor()) {
+                // long running operation, for example:
+                System.Threading.Thread.Sleep(1000);
+            }
+            </code>
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.WaitCursor.#ctor">
+            <summary>
+            Save the current cursor and then set it to WaitCursor
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.WaitCursor.Dispose">
+            <summary>
+            Restore the previous cursor
+            </summary>
+        </member>
+    </members>
+</doc>
