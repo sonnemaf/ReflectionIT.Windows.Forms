@@ -49,8 +49,8 @@ namespace ReflectionIT.Windows.Forms {
     [ToolboxBitmap(typeof(Bitmap))] // Set Projects Default Namespace to current NameSpace. Add 16x16x16 bitmap to the project, set its BuildAction to: Embedded Resource
     [DefaultProperty("Button")]
     [DefaultEvent("BeforeAction")]
-#if !NET5_0_OR_GREATER 
-    //[Designer(typeof(ReflectionIT.Windows.Forms.Design.DualListDesigner))]
+#if NET48
+    [Designer(typeof(ReflectionIT.Windows.Forms.Design.DualListDesigner))]
 #endif
     public class DualList : System.ComponentModel.Component {
         // Controls

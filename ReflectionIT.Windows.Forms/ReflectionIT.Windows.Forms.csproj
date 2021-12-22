@@ -14,18 +14,24 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0-windows|AnyCPU'">
-	  <DocumentationFile>C:\Users\Fons\source\repos\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms.xml</DocumentationFile>
+		<DocumentationFile>C:\Users\Fons\source\repos\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms.xml</DocumentationFile>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0-windows|AnyCPU'">
-	  <DocumentationFile>C:\Users\Fons\source\repos\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms\ReflectionIT.Windows.Forms.xml</DocumentationFile>
+	<PropertyGroup>
+		<DocumentationFile>ReflectionIT.Windows.Forms.xml</DocumentationFile>
 	</PropertyGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)'=='net48'">
+		<Reference Include="System.Design">
+			<Name>System.Design</Name>
+		</Reference>
+	</ItemGroup>
+	
 	<ItemGroup>
-	  <None Include="..\LICENSE">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

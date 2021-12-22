@@ -30,8 +30,10 @@ namespace ReflectionIT.Windows.Forms {
 	/// </summary>
 	[ToolboxBitmap(typeof(Bitmap))] // Set Projects Default Namespace to current NameSpace. Add 16x16x16 bitmap to the project, set its BuildAction to: Embedded Resource
 	[DefaultProperty("ListBoxFrom")]
-	//[Designer(typeof(ReflectionIT.Windows.Forms.Design.DualListDragDropDesigner))]
-	public class DualListDragDrop : System.ComponentModel.Component {
+#if NET48
+    [Designer(typeof(ReflectionIT.Windows.Forms.Design.DualListDragDropDesigner))]
+#endif
+    public class DualListDragDrop : System.ComponentModel.Component {
 
 		private DropIndicator _dropper;
 		private DateTime _nextScroll = DateTime.Now;
