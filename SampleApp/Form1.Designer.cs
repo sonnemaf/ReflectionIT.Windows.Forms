@@ -24,12 +24,14 @@ namespace SampleApp {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.moveItemBehaviorAdd = new ReflectionIT.Windows.Forms.MoveItemBehavior();
-            this.moveItemBehaviorDelete = new ReflectionIT.Windows.Forms.MoveItemBehavior();
+            this.dualList1 = new ReflectionIT.Windows.Forms.DualList(this.components);
+            this.dualList2 = new ReflectionIT.Windows.Forms.DualList(this.components);
+            this.dualListDragDrop1 = new ReflectionIT.Windows.Forms.DualListDragDrop(this.components);
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -79,17 +81,24 @@ namespace SampleApp {
             this.buttonDelete.Text = "< Delete <";
             this.buttonDelete.UseVisualStyleBackColor = true;
             // 
-            // moveItemBehaviorAdd
+            // dualList1
             // 
-            this.moveItemBehaviorAdd.ActionButton = this.buttonAdd;
-            this.moveItemBehaviorAdd.Destination = this.listBox2;
-            this.moveItemBehaviorAdd.Source = this.listBox1;
+            this.dualList1.Button = this.buttonAdd;
+            this.dualList1.DoubleClickSupport = true;
+            this.dualList1.ListBoxFrom = this.listBox1;
+            this.dualList1.ListBoxTo = this.listBox2;
             // 
-            // moveItemBehaviorDelete
+            // dualList2
             // 
-            this.moveItemBehaviorDelete.ActionButton = this.buttonDelete;
-            this.moveItemBehaviorDelete.Destination = this.listBox1;
-            this.moveItemBehaviorDelete.Source = this.listBox2;
+            this.dualList2.Button = this.buttonDelete;
+            this.dualList2.DoubleClickSupport = true;
+            this.dualList2.ListBoxFrom = this.listBox2;
+            this.dualList2.ListBoxTo = this.listBox1;
+            // 
+            // dualListDragDrop1
+            // 
+            this.dualListDragDrop1.ListBoxFrom = this.listBox1;
+            this.dualListDragDrop1.ListBoxTo = this.listBox2;
             // 
             // Form1
             // 
@@ -112,8 +121,9 @@ namespace SampleApp {
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button buttonDelete;
-        private ReflectionIT.Windows.Forms.MoveItemBehavior moveItemBehaviorAdd;
-        private ReflectionIT.Windows.Forms.MoveItemBehavior moveItemBehaviorDelete;
+        private ReflectionIT.Windows.Forms.DualList dualList1;
+        private ReflectionIT.Windows.Forms.DualList dualList2;
+        private ReflectionIT.Windows.Forms.DualListDragDrop dualListDragDrop1;
     }
 }
 

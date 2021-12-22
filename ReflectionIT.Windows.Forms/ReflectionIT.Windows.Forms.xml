@@ -4,10 +4,319 @@
         <name>ReflectionIT.Windows.Forms</name>
     </assembly>
     <members>
-        <member name="T:ReflectionIT.Windows.Forms.MoveItemBehavior">
+        <member name="T:ReflectionIT.Windows.Forms.DropIndicator">
             <summary>
-            Summary description for DualListComponent.
+            Summary description for DropIndicator.
             </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListAction">
+            <summary>
+            Action enum for a DualList
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.BeforeActionHandler">
+            <summary>
+            BeforeActionHandler
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.AfterActionHandler">
+            <summary>
+            AfterActionHandler
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualList">
+            <summary>
+            The DualList component handles the movement of items between 2 listboxes.
+            
+            The DualList component takes care of the following features:
+            - Actions: Move Selected, Copy Selected, Move All, Copy All 
+            - DoubleClick support, inclusive (re)setting the Default button 
+            - Select next item 
+            - Enable and disable buttons 
+            - MultiSelect support 
+            
+            You can place it on the form as a sort of "invisible control". 
+            Next you set its behaviour properties: Action, Button, ListBoxFrom and ListBoxTo. 
+            Optionally you can set the DoubleClickSupport and AutoDisableButton properties. 
+            
+            Created by: Fons Sonnemans, Reflection IT
+            
+            For questions and comments: Fons.Sonnemans@reflectionit.nl
+            </summary>
+        </member>
+        <member name="E:ReflectionIT.Windows.Forms.DualList.BeforeAction">
+            <summary>
+            Before event
+            </summary>
+        </member>
+        <member name="E:ReflectionIT.Windows.Forms.DualList.AfterAction">
+            <summary>
+            After event
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.ButtonClick(System.Object,System.EventArgs)">
+            <summary>
+            Button Click EventHandler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.FromEnter(System.Object,System.EventArgs)">
+            <summary>
+            ListBoxFrom Leave EventHandler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.FromLeave(System.Object,System.EventArgs)">
+            <summary>
+            ListBoxFrom Leave EventHandler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.FromDoubleClick(System.Object,System.EventArgs)">
+            <summary>
+            ListBoxFrom DoubleClick EventHandler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            ListBoxFrom SelectedIndexChanged EventHandler, Enables/Disables the button
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.ListBoxFrom">
+            <summary>
+            Returns/sets the ListBox where the items are moved/copied from
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.ListBoxTo">
+            <summary>
+            Returns/sets the ListBox where the items are moved/copied to
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.Button">
+            <summary>
+            Returns/sets the Button which Click event is handled
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.DoubleClickSupport">
+            <summary>
+            Returns/sets the DoubleClickSupport
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.AutoDisableButton">
+            <summary>
+            Returns/sets whether button should be disabled when no Item in the 'From' ListBox is selected.
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualList.Action">
+            <summary>
+            Returns/sets the Action which is executed when the Button is clicked
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.MoveSelected">
+            <summary>
+            Move the selected Item from ListBoxFrom to ListBoxTo
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.CopySelected">
+            <summary>
+            Copy the selected Item from ListBoxFrom to ListBoxTo
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.MoveAll">
+            <summary>
+            Move all Items from ListBoxFrom to ListBoxTo
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.CopyAll">
+            <summary>
+            Copy all Items from ListBoxFrom to ListBoxTo
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.Click">
+            <summary>
+            Decide what to do
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.DoSelected(ReflectionIT.Windows.Forms.DualListAction)">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.EnableDisable">
+            <summary>
+            Enable/Disable button
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualList.DoAction(System.Boolean,System.Int32)">
+            <summary>
+            Move/Copy the given Item and raise the Before and After events.
+            </summary>
+            <param name="remove">True is Remove item</param>
+            <param name="index">Index of Item to Move/Copy</param>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListActionCancelEventArgs">
+            <summary>
+            DualListActionCancelEventArgs used to Cancel or Change a DualList BeforeAction event
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListActionCancelEventArgs.Index">
+            <summary>
+            Returns the index of the Item 
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListActionEventArgs">
+            <summary>
+            DualListActionEventArgs used for a DualList AfterAction event
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListActionEventArgs.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="fromIndex">Index of the moved/copied item in the ListBoxFrom.Items</param>
+            <param name="toIndex">Index of the moved/copied item in the ListBoxTo.Items</param>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListActionEventArgs.FromIndex">
+            <summary>
+            Index of the moved/copied item in the ListBoxFrom.Items
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListActionEventArgs.ToIndex">
+            <summary>
+            Index of the moved/copied item in the ListBoxTo.Items
+            </summary>
+            <remarks>When the ListBoTo is Sorted it will always be -1</remarks>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListDragDropAction">
+            <summary>
+            Action enum for a DualListDragDrop component
+            </summary>
+        </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListDragDrop">
+            <summary>
+            The DualListDragDrop component handles the Drag and Drop of the items 
+            between two listboxes.
+            
+            You can place it on the form as a sort of "invisible control". 
+            Next you set its behaviour properties: ListBoxFrom and ListBoxTo. 
+            
+            Created by: Fons Sonnemans, Reflection IT
+            
+            For questions and comments: Fons.Sonnemans@reflectionit.nl
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom">
+            <summary>
+            Returns/sets the ListBox where the items are moved/copied from
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo">
+            <summary>
+            Returns/sets the ListBox where the items are moved/copied to
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.Action">
+            <summary>
+            Returns/sets the action that is executed by the Drag and Drop
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.ShowDropIndicator">
+            <summary>
+            Returns/sets whether a drop indicator line is shown
+            </summary>
+        </member>
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.IndicatorColor">
+            <summary>
+            Returns/sets the IndicatorColor used to display the indicator line in the 'To' ListBox.
+            </summary>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Detect mouse down
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Start Drag and Drop, remove Item when finished
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Set the Cursor, show the 'dropper' and scroll the listbox
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragLeave(System.Object,System.EventArgs)">
+            <summary>
+            Hide the drop indicator
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragDrop(System.Object,System.Windows.Forms.DragEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_QueryContinueDrag(System.Object,System.Windows.Forms.QueryContinueDragEventArgs)">
+            <summary>
+            Cancel the drag if the mouse moves off the form.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Stop Drag and Drop
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragEnter(System.Object,System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Add the 'dropper' to the parent of ListBoxTo
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Set the cursor for the From ListBox
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.SetCursor(System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Set the Cursor depending on the Action and the KeyState
+            </summary>
+            <param name="e"></param>
         </member>
         <member name="T:ReflectionIT.Windows.Forms.WaitCursor">
             <summary>

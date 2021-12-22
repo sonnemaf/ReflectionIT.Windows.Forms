@@ -28,8 +28,8 @@ namespace SampleAppFramework {
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.moveItemBehaviorAdd = new ReflectionIT.Windows.Forms.MoveItemBehavior();
-            this.moveItemBehaviorDelete = new ReflectionIT.Windows.Forms.MoveItemBehavior();
+            this.moveItemBehaviorAdd = new ReflectionIT.Windows.Forms.DualList();
+            this.moveItemBehaviorDelete = new ReflectionIT.Windows.Forms.DualList();
             this.SuspendLayout();
             // 
             // button1
@@ -76,15 +76,15 @@ namespace SampleAppFramework {
             // 
             // moveItemBehaviorAdd
             // 
-            this.moveItemBehaviorAdd.ActionButton = this.button1;
-            this.moveItemBehaviorAdd.Destination = this.listBox2;
-            this.moveItemBehaviorAdd.Source = this.listBox1;
+            this.moveItemBehaviorAdd.Button = this.button1;
+            this.moveItemBehaviorAdd.ListBoxTo = this.listBox2;
+            this.moveItemBehaviorAdd.ListBoxFrom = this.listBox1;
             // 
             // moveItemBehaviorDelete
             // 
-            this.moveItemBehaviorDelete.ActionButton = this.button2;
-            this.moveItemBehaviorDelete.Destination = this.listBox1;
-            this.moveItemBehaviorDelete.Source = this.listBox2;
+            this.moveItemBehaviorDelete.Button = this.button2;
+            this.moveItemBehaviorDelete.ListBoxTo = this.listBox1;
+            this.moveItemBehaviorDelete.ListBoxFrom = this.listBox2;
             // 
             // Form1
             // 
@@ -108,8 +108,8 @@ namespace SampleAppFramework {
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button button2;
 
-        private ReflectionIT.Windows.Forms.MoveItemBehavior moveItemBehaviorAdd;
-        private ReflectionIT.Windows.Forms.MoveItemBehavior moveItemBehaviorDelete;
+        private ReflectionIT.Windows.Forms.DualList moveItemBehaviorAdd;
+        private ReflectionIT.Windows.Forms.DualList moveItemBehaviorDelete;
     }
 }
 
