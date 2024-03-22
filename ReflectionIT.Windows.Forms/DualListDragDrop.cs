@@ -58,8 +58,8 @@ namespace ReflectionIT.Windows.Forms {
 		}
 
 		// Controls
-		private ListBox _listBoxFrom;
-        private ListBox _listBoxTo;
+		private ListBox _from;
+        private ListBox _to;
 
         // Extra Fields
         private bool _mouseDown = false;
@@ -73,18 +73,18 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		[Category("Behavior")]
 		[Description("ListBox which the item(s) are dragged from")]
-		public virtual ListBox ListBoxFrom {
-			get { return _listBoxFrom; }
+		public virtual ListBox From {
+			get { return _from; }
 			set { 
-				if (_listBoxFrom != value) {
+				if (_from != value) {
 
-					_listBoxFrom = value;
-					if (_listBoxFrom != null) {
-						_listBoxFrom.MouseDown += new MouseEventHandler(ListBoxFrom_MouseDown);
-						_listBoxFrom.MouseUp += new MouseEventHandler(ListBoxFrom_MouseUp);
-						_listBoxFrom.MouseMove += new MouseEventHandler(ListBoxFrom_MouseMove);
-						_listBoxFrom.QueryContinueDrag += new QueryContinueDragEventHandler(ListBoxFrom_QueryContinueDrag);
-						_listBoxFrom.DragOver +=new DragEventHandler(ListBoxFrom_DragOver);
+					_from = value;
+					if (_from is not null) {
+						_from.MouseDown += new MouseEventHandler(From_MouseDown);
+						_from.MouseUp += new MouseEventHandler(From_MouseUp);
+						_from.MouseMove += new MouseEventHandler(From_MouseMove);
+						_from.QueryContinueDrag += new QueryContinueDragEventHandler(From_QueryContinueDrag);
+						_from.DragOver +=new DragEventHandler(From_DragOver);
 					}
 				}
 			}
@@ -95,17 +95,17 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		[Category("Behavior")]
 		[Description("ListBox where the item(s) are dropped to")]
-		public virtual ListBox ListBoxTo {
-			get { return _listBoxTo; }
+		public virtual ListBox To {
+			get { return _to; }
 			set { 
-				if (_listBoxTo != value) {
-					_listBoxTo = value;
-					if (_listBoxTo != null) {
-						_listBoxTo.AllowDrop = true;
-						_listBoxTo.DragDrop += new DragEventHandler(ListBoxTo_DragDrop);
-						_listBoxTo.DragEnter += new DragEventHandler(ListBoxTo_DragEnter);
-						_listBoxTo.DragLeave += new EventHandler(ListBoxTo_DragLeave);
-						_listBoxTo.DragOver += new DragEventHandler(ListBoxTo_DragOver);
+				if (_to != value) {
+					_to = value;
+					if (_to is not null) {
+						_to.AllowDrop = true;
+						_to.DragDrop += new DragEventHandler(To_DragDrop);
+						_to.DragEnter += new DragEventHandler(To_DragEnter);
+						_to.DragLeave += new EventHandler(To_DragLeave);
+						_to.DragOver += new DragEventHandler(To_DragOver);
 					}
 				}
 			}
@@ -147,9 +147,9 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxFrom_MouseDown(object sender, MouseEventArgs e) {
+		private void From_MouseDown(object sender, MouseEventArgs e) {
 			try {
-				_indexOfItemUnderMouseToDrag = ListBoxFrom.IndexFromPoint(e.X, e.Y);
+				_indexOfItemUnderMouseToDrag = From.IndexFromPoint(e.X, e.Y);
 				_mouseDown = _indexOfItemUnderMouseToDrag > -1;
 				Size dragSize = SystemInformation.DragSize;
 
@@ -167,7 +167,7 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxFrom_MouseMove(object sender, MouseEventArgs e) {
+		private void From_MouseMove(object sender, MouseEventArgs e) {
 			if (_mouseDown && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
 
 				if (_dragBoxFromMouseDown != Rectangle.Empty && !_dragBoxFromMouseDown.Contains(e.X, e.Y)) {
@@ -176,7 +176,7 @@ namespace ReflectionIT.Windows.Forms {
 					_screenOffset = SystemInformation.WorkingArea.Location;
 					DragDropEffects dropEffect = DragDropEffects.None;
 					try {
-						dropEffect = ListBoxFrom.DoDragDrop(_indexOfItemUnderMouseToDrag, DragDropEffects.All | DragDropEffects.Link);
+						dropEffect = From.DoDragDrop(_indexOfItemUnderMouseToDrag, DragDropEffects.All | DragDropEffects.Link);
 					} 
 					catch (System.Exception) {
 						// ignore errors
@@ -192,7 +192,7 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxTo_DragOver(object sender, DragEventArgs e) {
+		private void To_DragOver(object sender, DragEventArgs e) {
 			if (_mouseDown) {
 
 				// Cursor
@@ -201,41 +201,41 @@ namespace ReflectionIT.Windows.Forms {
 				// Drop Indicator
 				if (ShowDropIndicator) {
 					_dropper.Visible = true;
-					_indexOfItemUnderMouseToDrop = ListBoxTo.IndexFromPoint(ListBoxTo.PointToClient(new Point(e.X, e.Y + 4)));
+					_indexOfItemUnderMouseToDrop = To.IndexFromPoint(To.PointToClient(new Point(e.X, e.Y + 4)));
 					int y = 1;
 					if (_indexOfItemUnderMouseToDrop > -1) {
-						Rectangle rect = ListBoxTo.GetItemRectangle(_indexOfItemUnderMouseToDrop);
+						Rectangle rect = To.GetItemRectangle(_indexOfItemUnderMouseToDrop);
 						y = rect.Top + 1;
-						if (y == 1 && ListBoxTo.TopIndex > 0) {
+						if (y == 1 && To.TopIndex > 0) {
 							// Scroll Up
 							if (DateTime.Now > _nextScroll) {
-								ListBoxTo.TopIndex -= 1;
+								To.TopIndex -= 1;
 								_nextScroll = DateTime.Now.AddMilliseconds(100);
 							} 
 							return; // Exit!
 						} else {
-							if (rect.Bottom + 1 > ListBoxTo.DisplayRectangle.Height) {
+							if (rect.Bottom + 1 > To.DisplayRectangle.Height) {
 								// Scroll Down
 								if (DateTime.Now > _nextScroll) {
-									ListBoxTo.TopIndex += 1;
+									To.TopIndex += 1;
 									_nextScroll = DateTime.Now.AddMilliseconds(100);
 								}
 							}
 						}
 					} else {
-						if (ListBoxTo.Items.Count > 0) {
+						if (To.Items.Count > 0) {
 							// Scrolled to last item, select botom
-							Rectangle rect = ListBoxTo.GetItemRectangle(ListBoxTo.Items.Count - 1);
+							Rectangle rect = To.GetItemRectangle(To.Items.Count - 1);
 							y = rect.Bottom + 1;
 						} else {
-							if (!ListBoxTo.DisplayRectangle.Contains(ListBoxTo.PointToClient(new Point(e.X, e.Y)))) {
+							if (!To.DisplayRectangle.Contains(To.PointToClient(new Point(e.X, e.Y)))) {
 								return;
 							}
 						}
 					}
 
 					// Set the Top of the dropper
-					_dropper.Top = ListBoxTo.Top + y + 1;
+					_dropper.Top = To.Top + y + 1;
 				}
 			}
 		}
@@ -245,7 +245,7 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxTo_DragLeave(object sender, EventArgs e) {
+		private void To_DragLeave(object sender, EventArgs e) {
 			_dropper.Visible = false;
 		}
 
@@ -254,32 +254,32 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxTo_DragDrop(object sender, DragEventArgs e) {
+		private void To_DragDrop(object sender, DragEventArgs e) {
 			if (_mouseDown) {
 				_dropper.Visible = false;
-				object item = ListBoxFrom.Items[_indexOfItemUnderMouseToDrag];
+				object item = From.Items[_indexOfItemUnderMouseToDrag];
 				
 				// Insert the item.
 				if (ShowDropIndicator && _indexOfItemUnderMouseToDrop != ListBox.NoMatches) {
-					ListBoxTo.Items.Insert(_indexOfItemUnderMouseToDrop, item);
-					ListBoxTo.SelectedIndex = _indexOfItemUnderMouseToDrop;
+					To.Items.Insert(_indexOfItemUnderMouseToDrop, item);
+					To.SelectedIndex = _indexOfItemUnderMouseToDrop;
 				} else {
-					ListBoxTo.SelectedIndex = ListBoxTo.Items.Add(item);
+					To.SelectedIndex = To.Items.Add(item);
 				}
 
 				// Move position, not from listbox
-				if (ListBoxFrom == ListBoxTo) {
+				if (From == To) {
 					if (_indexOfItemUnderMouseToDrop != ListBox.NoMatches && 
 						_indexOfItemUnderMouseToDrag > _indexOfItemUnderMouseToDrop) {
 						_indexOfItemUnderMouseToDrag++;
 					}
-					ListBoxFrom.Items.RemoveAt(_indexOfItemUnderMouseToDrag);
+					From.Items.RemoveAt(_indexOfItemUnderMouseToDrag);
 					e.Effect = DragDropEffects.None; // Cancels RemoveAt() in MouseMove eventhandler
 				} else {
 					// Finished
 					if (e.Effect == DragDropEffects.Move) {
-						ListBoxFrom.Items.RemoveAt(_indexOfItemUnderMouseToDrag);
-						ListBoxFrom.SelectedIndex = ListBoxFrom.Items.Count > _indexOfItemUnderMouseToDrag ? _indexOfItemUnderMouseToDrag : ListBoxFrom.Items.Count - 1;
+						From.Items.RemoveAt(_indexOfItemUnderMouseToDrag);
+						From.SelectedIndex = From.Items.Count > _indexOfItemUnderMouseToDrag ? _indexOfItemUnderMouseToDrag : From.Items.Count - 1;
                     }
 				}
 				_mouseDown = false;
@@ -291,10 +291,10 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxFrom_QueryContinueDrag(object sender, QueryContinueDragEventArgs e) {
+		private void From_QueryContinueDrag(object sender, QueryContinueDragEventArgs e) {
 			ListBox lb = sender as ListBox;
 	
-			if (lb != null) {
+			if (lb is not null) {
 
 				Form f = lb.FindForm();
 
@@ -321,7 +321,7 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxFrom_MouseUp(object sender, MouseEventArgs e) {
+		private void From_MouseUp(object sender, MouseEventArgs e) {
 			_mouseDown = false;
 			_dropper.Visible = false;
 		}
@@ -331,17 +331,17 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxTo_DragEnter(object sender, DragEventArgs e) {
+		private void To_DragEnter(object sender, DragEventArgs e) {
 			if (_mouseDown) {
 				if (ShowDropIndicator) {
-					Control.ControlCollection controls = ListBoxTo.Parent.Controls;
+					Control.ControlCollection controls = To.Parent.Controls;
 					if (!controls.Contains(_dropper)) {
-						_dropper.Left = ListBoxTo.Left - 5;
+						_dropper.Left = To.Left - 5;
 						_dropper.Height = 1;
-						_dropper.Width = ListBoxTo.Width + 10;
+						_dropper.Width = To.Width + 10;
 						_dropper.Enabled = false;
 						_dropper.Top = -500;
-						_dropper.Anchor = ListBoxTo.Anchor;
+						_dropper.Anchor = To.Anchor;
 						_dropper.ForeColor = IndicatorColor;
 						controls.Add(_dropper);
 						controls.SetChildIndex(_dropper, 0);
@@ -355,7 +355,7 @@ namespace ReflectionIT.Windows.Forms {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ListBoxFrom_DragOver(object sender, DragEventArgs e) {
+		private void From_DragOver(object sender, DragEventArgs e) {
 			if (_mouseDown) {
 				SetCursor(e);
 			}

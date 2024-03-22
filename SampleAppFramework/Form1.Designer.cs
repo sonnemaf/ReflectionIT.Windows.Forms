@@ -77,14 +77,14 @@ namespace SampleAppFramework {
             // moveItemBehaviorAdd
             // 
             this.moveItemBehaviorAdd.Button = this.button1;
-            this.moveItemBehaviorAdd.ListBoxTo = this.listBox2;
-            this.moveItemBehaviorAdd.ListBoxFrom = this.listBox1;
+            this.moveItemBehaviorAdd.To = this.listBox2;
+            this.moveItemBehaviorAdd.From = this.listBox1;
             // 
             // moveItemBehaviorDelete
             // 
             this.moveItemBehaviorDelete.Button = this.button2;
-            this.moveItemBehaviorDelete.ListBoxTo = this.listBox1;
-            this.moveItemBehaviorDelete.ListBoxFrom = this.listBox2;
+            this.moveItemBehaviorDelete.To = this.listBox1;
+            this.moveItemBehaviorDelete.From = this.listBox2;
             // 
             // Form1
             // 

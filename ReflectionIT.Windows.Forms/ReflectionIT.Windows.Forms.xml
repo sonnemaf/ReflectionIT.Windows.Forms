@@ -9,11 +9,6 @@
             Summary description for DropIndicator.
             </summary>
         </member>
-        <member name="T:ReflectionIT.Windows.Forms.DualListAction">
-            <summary>
-            Action enum for a DualList
-            </summary>
-        </member>
         <member name="T:ReflectionIT.Windows.Forms.BeforeActionHandler">
             <summary>
             BeforeActionHandler
@@ -89,12 +84,12 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="P:ReflectionIT.Windows.Forms.DualList.ListBoxFrom">
+        <member name="P:ReflectionIT.Windows.Forms.DualList.From">
             <summary>
             Returns/sets the ListBox where the items are moved/copied from
             </summary>
         </member>
-        <member name="P:ReflectionIT.Windows.Forms.DualList.ListBoxTo">
+        <member name="P:ReflectionIT.Windows.Forms.DualList.To">
             <summary>
             Returns/sets the ListBox where the items are moved/copied to
             </summary>
@@ -162,6 +157,11 @@
             <param name="remove">True is Remove item</param>
             <param name="index">Index of Item to Move/Copy</param>
         </member>
+        <member name="T:ReflectionIT.Windows.Forms.DualListAction">
+            <summary>
+            Action enum for a DualList
+            </summary>
+        </member>
         <member name="T:ReflectionIT.Windows.Forms.DualListActionCancelEventArgs">
             <summary>
             DualListActionCancelEventArgs used to Cancel or Change a DualList BeforeAction event
@@ -224,12 +224,12 @@
             Constructor
             </summary>
         </member>
-        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom">
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.From">
             <summary>
             Returns/sets the ListBox where the items are moved/copied from
             </summary>
         </member>
-        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo">
+        <member name="P:ReflectionIT.Windows.Forms.DualListDragDrop.To">
             <summary>
             Returns/sets the ListBox where the items are moved/copied to
             </summary>
@@ -249,63 +249,63 @@
             Returns/sets the IndicatorColor used to display the indicator line in the 'To' ListBox.
             </summary>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.From_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             Detect mouse down
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.From_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             Start Drag and Drop, remove Item when finished
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.To_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
             <summary>
             Set the Cursor, show the 'dropper' and scroll the listbox
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragLeave(System.Object,System.EventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.To_DragLeave(System.Object,System.EventArgs)">
             <summary>
             Hide the drop indicator
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragDrop(System.Object,System.Windows.Forms.DragEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.To_DragDrop(System.Object,System.Windows.Forms.DragEventArgs)">
             <summary>
             
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_QueryContinueDrag(System.Object,System.Windows.Forms.QueryContinueDragEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.From_QueryContinueDrag(System.Object,System.Windows.Forms.QueryContinueDragEventArgs)">
             <summary>
             Cancel the drag if the mouse moves off the form.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.From_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             Stop Drag and Drop
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxTo_DragEnter(System.Object,System.Windows.Forms.DragEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.To_DragEnter(System.Object,System.Windows.Forms.DragEventArgs)">
             <summary>
             Add the 'dropper' to the parent of ListBoxTo
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.ListBoxFrom_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
+        <member name="M:ReflectionIT.Windows.Forms.DualListDragDrop.From_DragOver(System.Object,System.Windows.Forms.DragEventArgs)">
             <summary>
             Set the cursor for the From ListBox
             </summary>

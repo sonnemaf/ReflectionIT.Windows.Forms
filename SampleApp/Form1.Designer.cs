@@ -85,20 +85,20 @@ namespace SampleApp {
             // 
             this.dualList1.Button = this.buttonAdd;
             this.dualList1.DoubleClickSupport = true;
-            this.dualList1.ListBoxFrom = this.listBox1;
-            this.dualList1.ListBoxTo = this.listBox2;
+            this.dualList1.From = this.listBox1;
+            this.dualList1.To = this.listBox2;
             // 
             // dualList2
             // 
             this.dualList2.Button = this.buttonDelete;
             this.dualList2.DoubleClickSupport = true;
-            this.dualList2.ListBoxFrom = this.listBox2;
-            this.dualList2.ListBoxTo = this.listBox1;
+            this.dualList2.From = this.listBox2;
+            this.dualList2.To = this.listBox1;
             // 
             // dualListDragDrop1
             // 
-            this.dualListDragDrop1.ListBoxFrom = this.listBox1;
-            this.dualListDragDrop1.ListBoxTo = this.listBox2;
+            this.dualListDragDrop1.From = this.listBox1;
+            this.dualListDragDrop1.To = this.listBox2;
             // 
             // Form1
             // 

@@ -8,16 +8,6 @@ using System.Drawing;
 namespace ReflectionIT.Windows.Forms {
 
     /// <summary>
-    /// Action enum for a DualList
-    /// </summary>
-    public enum DualListAction {
-        MoveSelected = 0,
-        CopySelected = 1,
-        MoveAll = 2,
-        CopyAll = 3,
-    }
-
-    /// <summary>
     /// BeforeActionHandler
     /// </summary>
     public delegate void BeforeActionHandler(object sender, DualListActionCancelEventArgs e);
@@ -54,8 +44,8 @@ namespace ReflectionIT.Windows.Forms {
 #endif
     public class DualList : System.ComponentModel.Component {
         // Controls
-        private ListBox _listBoxFrom;
-        private ListBox _listBoxTo;
+        private ListBox _from;
+        private ListBox _to;
         private Button _button;
 
         // Properties
@@ -112,7 +102,7 @@ namespace ReflectionIT.Windows.Forms {
         protected virtual void FromEnter(object sender, System.EventArgs e) {
             if (DoubleClickSupport) {
                 // Set the AcceptButton of the Form
-                Form f = _listBoxFrom.FindForm();
+                Form f = _from.FindForm();
                 PreviousAcceptButton = f.AcceptButton;
                 f.AcceptButton = _button;
             }
@@ -126,7 +116,7 @@ namespace ReflectionIT.Windows.Forms {
         protected virtual void FromLeave(object sender, System.EventArgs e) {
             if (DoubleClickSupport) {
                 // Reset the AcceptButton of the Form
-                Form f = _listBoxFrom.FindForm();
+                Form f = _from.FindForm();
                 f.AcceptButton = PreviousAcceptButton;
             }
         }
@@ -156,15 +146,15 @@ namespace ReflectionIT.Windows.Forms {
         /// </summary>
         [Category("Behavior")]
         [Description("ListBox which the item(s) are moved/copied from")]
-        public virtual ListBox ListBoxFrom {
-            get { return _listBoxFrom; }
+        public virtual ListBox From {
+            get { return _from; }
             set {
-                _listBoxFrom = value;
-                if (_listBoxFrom != null) {
-                    _listBoxFrom.Enter += new System.EventHandler(this.FromEnter);
-                    _listBoxFrom.Leave += new System.EventHandler(this.FromLeave);
-                    _listBoxFrom.DoubleClick += new System.EventHandler(this.FromDoubleClick);
-                    _listBoxFrom.SelectedIndexChanged += new System.EventHandler(this.SelectedIndexChanged);
+                _from = value;
+                if (_from is not null) {
+                    _from.Enter += new System.EventHandler(this.FromEnter);
+                    _from.Leave += new System.EventHandler(this.FromLeave);
+                    _from.DoubleClick += new System.EventHandler(this.FromDoubleClick);
+                    _from.SelectedIndexChanged += new System.EventHandler(this.SelectedIndexChanged);
                 }
                 EnableDisable();
             }
@@ -175,9 +165,9 @@ namespace ReflectionIT.Windows.Forms {
         /// </summary>
         [Category("Behavior")]
         [Description("ListBox where the item(s) are moved/copied to")]
-        public virtual ListBox ListBoxTo {
-            get { return _listBoxTo; }
-            set { _listBoxTo = value; }
+        public virtual ListBox To {
+            get { return _to; }
+            set { _to = value; }
         }
 
         /// <summary>
@@ -189,7 +179,7 @@ namespace ReflectionIT.Windows.Forms {
             get { return _button; }
             set {
                 _button = value;
-                if (_button != null) {
+                if (_button is not null) {
                     _button.Click += new System.EventHandler(this.ButtonClick);
                     EnableDisable();
                 }
@@ -217,7 +207,7 @@ namespace ReflectionIT.Windows.Forms {
                 if (value) {
                     EnableDisable();
                 } else {
-                    if (Button != null) {
+                    if (Button is not null) {
                         Button.Enabled = true;
                     }
                 }
@@ -260,10 +250,10 @@ namespace ReflectionIT.Windows.Forms {
         /// </summary>
         public virtual void MoveAll() {
             _busy = true;
-            for (int t = 0; t < _listBoxFrom.Items.Count; t++) {
+            for (int t = 0; t < _from.Items.Count; t++) {
                 DoAction(false, t);
             }
-            _listBoxFrom.Items.Clear();
+            _from.Items.Clear();
             _busy = false;
             EnableDisable();
         }
@@ -273,7 +263,7 @@ namespace ReflectionIT.Windows.Forms {
         /// </summary>
         public virtual void CopyAll() {
             _busy = true;
-            for (int t = 0; t < _listBoxFrom.Items.Count; t++) {
+            for (int t = 0; t < _from.Items.Count; t++) {
                 DoAction(false, t);
             }
             _busy = false;
@@ -284,7 +274,7 @@ namespace ReflectionIT.Windows.Forms {
         /// Decide what to do
         /// </summary>
         protected virtual void Click() {
-            if (_button != null && ListBoxFrom != null && ListBoxTo != null) {
+            if (_button is not null && From is not null && To is not null) {
                 switch (Action) {
                     case DualListAction.MoveSelected:
                         MoveSelected();
@@ -307,12 +297,12 @@ namespace ReflectionIT.Windows.Forms {
         /// </summary>
         /// <param name="action"></param>
         protected virtual void DoSelected(DualListAction action) {
-            ListBoxTo.BeginUpdate();
-            ListBoxFrom.BeginUpdate();
-            if (_listBoxFrom.SelectionMode == SelectionMode.One) {
+            To.BeginUpdate();
+            From.BeginUpdate();
+            if (_from.SelectionMode == SelectionMode.One) {
                 // Single Select
-                if (_listBoxFrom.SelectedIndex > -1) {
-                    int i = _listBoxFrom.SelectedIndex;
+                if (_from.SelectedIndex > -1) {
+                    int i = _from.SelectedIndex;
                     int newIndex = -1;
                     if (action == DualListAction.MoveSelected) {
                         newIndex = DoAction(true, i);
@@ -322,67 +312,67 @@ namespace ReflectionIT.Windows.Forms {
                     }
 
                     // select next/previous item
-                    if (i >= (_listBoxFrom.Items.Count)) {
-                        i = _listBoxFrom.Items.Count - 1;
+                    if (i >= (_from.Items.Count)) {
+                        i = _from.Items.Count - 1;
                     }
 
-                    _listBoxFrom.SelectedIndex = i;
+                    _from.SelectedIndex = i;
 
-                    _listBoxTo.SelectedIndex = newIndex;
+                    _to.SelectedIndex = newIndex;
                 }
             } else {
                 // MultiSelect
 
                 // Add all selected items
-                foreach (int x in _listBoxFrom.SelectedIndices) {
+                foreach (int x in _from.SelectedIndices) {
                     DoAction(false, x);
                 }
 
                 // Remove or de-select all selected items
                 int i;
-                if ((_listBoxFrom.SelectedIndices.Count) > 0) {
-                    i = _listBoxFrom.SelectedIndices[_listBoxFrom.SelectedIndices.Count - 1] + 1;
+                if ((_from.SelectedIndices.Count) > 0) {
+                    i = _from.SelectedIndices[_from.SelectedIndices.Count - 1] + 1;
                 } else {
                     return;
                 }
 
-                for (int t = _listBoxFrom.Items.Count - 1; t >= 0; t--) {
+                for (int t = _from.Items.Count - 1; t >= 0; t--) {
                     if (action == DualListAction.MoveSelected) {
-                        if (_listBoxFrom.SelectedIndices.Contains(t)) {
+                        if (_from.SelectedIndices.Contains(t)) {
                             i = t;
-                            _listBoxFrom.Items.RemoveAt(t);
+                            _from.Items.RemoveAt(t);
                         }
                     } else {
                         // de-select
-                        _listBoxFrom.SetSelected(t, false);
+                        _from.SetSelected(t, false);
                     }
                 }
 
                 // select next/previous item
-                if (i >= (_listBoxFrom.Items.Count)) {
-                    i = _listBoxFrom.Items.Count - 1;
+                if (i >= (_from.Items.Count)) {
+                    i = _from.Items.Count - 1;
                 }
                 if (i > -1) {
-                    _listBoxFrom.SetSelected(i, true);
+                    _from.SetSelected(i, true);
                 }
 
             }
-            ListBoxTo.EndUpdate();
-            ListBoxFrom.EndUpdate();
+            To.EndUpdate();
+            From.EndUpdate();
         }
 
         /// <summary>
         /// Enable/Disable button
         /// </summary>
         protected virtual void EnableDisable() {
-            if (AutoDisableButton && !_busy && Button != null && ListBoxFrom != null) {
+            if (AutoDisableButton && !_busy && Button is not null && From is not null) {
                 if ((Action == DualListAction.MoveSelected) || (Action == DualListAction.CopySelected)) {
-                    if (Button.Enabled != (ListBoxFrom.SelectedIndex > -1)) {
-                        Button.Enabled = (ListBoxFrom.SelectedIndex > -1);
+                    if (Button.Enabled != (From.SelectedIndex > -1)) {
+                        Button.Enabled = (From.SelectedIndex > -1);
                     }
                 } else {
-                    if (Button.Enabled != (ListBoxFrom.Items.Count > 0)) {
-                        Button.Enabled = (ListBoxFrom.Items.Count > 0);
+                    if (Button.Enabled != (From.Items.Count > 0)) {
+                        Button.Enabled = (From.Items.Count > 0);
                     }
                 }
             }
@@ -402,11 +392,11 @@ namespace ReflectionIT.Windows.Forms {
             // If not canceled
             if (!e.Cancel) {
                 // Add the item
-                int newIndex = _listBoxTo.Items.Add(_listBoxFrom.Items[index]);
+                int newIndex = _to.Items.Add(_from.Items[index]);
 
                 // Remove the item
                 if (remove) {
-                    _listBoxFrom.Items.RemoveAt(index);
+                    _from.Items.RemoveAt(index);
                 }
 
                 // Raise After event
